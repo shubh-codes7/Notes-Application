@@ -23,9 +23,22 @@ const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("./utilities");
 
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+// app.use(cors({ origin: "*" }));
 
+const allowedOrigins = [
+  "http://localhost:8000", // For local development
+  "https://notes-application-sigma.vercel.app", // Your deployed frontend URL
+];
 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+}));
 
 
 app.post("/create-account", async (req, res) => {
