@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://notes-application-sigma.vercel.app/",
+  baseURL: "https://notes-application-sigma.vercel.app",
 });
 
 axiosInstance.interceptors.request.use(
